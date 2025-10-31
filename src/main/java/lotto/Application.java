@@ -1,11 +1,14 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Application {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = createMoney();
+        WinningNumber winningNumber = createWinningNumber();
     }
 
     private static PurchaseAmount createMoney() {
@@ -21,6 +24,19 @@ public class Application {
         }
     }
 
+    private static WinningNumber createWinningNumber() {
+        while (true) {
+            try {
+                System.out.println("당첨 번호를 입력해 주세요.");
+                List<Integer> winningNumber = getWinningNumber();
+
+                return new WinningNumber(winningNumber);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
     private static int getPurchaseAmount() {
         try {
             String input = Console.readLine();
@@ -30,6 +46,23 @@ public class Application {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
+        }
+    }
+
+    private static List<Integer> getWinningNumber() {
+        try {
+            String input = Console.readLine();
+            if (Objects.isNull(input) || input.isBlank()) {
+                throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
+            }
+            String[] splitInput = input.split(",", -1);
+            return Arrays.stream(splitInput)
+                    .map(String::strip)
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다.");
         }
     }
 }
