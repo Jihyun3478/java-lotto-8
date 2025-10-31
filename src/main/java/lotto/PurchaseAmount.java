@@ -8,6 +8,10 @@ public class PurchaseAmount {
         this.purchaseAmount = purchaseAmount;
     }
 
+    public int countPublishLotto() {
+        return purchaseAmount / 1000;
+    }
+
     private void validate(int purchaseAmount) {
         validateUnit(purchaseAmount);
         validateLowerLimit(purchaseAmount);

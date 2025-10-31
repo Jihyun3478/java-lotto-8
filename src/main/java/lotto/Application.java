@@ -4,10 +4,25 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Application {
     public static void main(String[] args) {
         PurchaseAmount purchaseAmount = createMoney();
+        LottoMachine lottoMachine = new LottoMachine();
+        Lottos lottos = new Lottos();
+
+        int countPublishLotto = purchaseAmount.countPublishLotto();
+        System.out.println("\n" + countPublishLotto + "개를 구매했습니다.");
+
+        for (int count = 0; count < countPublishLotto; count++) {
+            Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
+            lottos.add(lotto);
+
+            String joinLottos = lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", "));
+            System.out.println("[" + joinLottos + "]");
+        }
+
         WinningNumber winningNumber = createWinningNumber();
         BonusNumber bonusNumber = createBonusNumber(winningNumber);
     }
@@ -28,7 +43,7 @@ public class Application {
     private static WinningNumber createWinningNumber() {
         while (true) {
             try {
-                System.out.println("당첨 번호를 입력해 주세요.");
+                System.out.println("\n당첨 번호를 입력해 주세요.");
                 List<Integer> winningNumber = getWinningNumber();
 
                 return new WinningNumber(winningNumber);
@@ -41,7 +56,7 @@ public class Application {
     private static BonusNumber createBonusNumber(WinningNumber winningNumber) {
         while (true) {
             try {
-                System.out.println("보너스 번호를 입력해 주세요.");
+                System.out.println("\n보너스 번호를 입력해 주세요.");
                 int bonusNumber = getBonusNumber();
                 if (winningNumber.isDuplicateWithBonusNumber(bonusNumber)) {
                     throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.");
