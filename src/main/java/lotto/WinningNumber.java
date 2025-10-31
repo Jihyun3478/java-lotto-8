@@ -12,6 +12,11 @@ public class WinningNumber {
         this.winningNumber = winningNumber;
     }
 
+    public boolean isDuplicateWithBonusNumber(int bonusNumber) {
+        return winningNumber.stream()
+                .anyMatch(number -> number == bonusNumber);
+    }
+
     private void validate(List<Integer> winningNumber) {
         validateSize(winningNumber);
         validateNumberRange(winningNumber);
