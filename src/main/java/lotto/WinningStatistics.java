@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.EnumMap;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 public class WinningStatistics {
@@ -18,5 +19,16 @@ public class WinningStatistics {
 
     public int getCountByRank(Rank rank) {
         return winningStatistics.getOrDefault(rank, 0);
+    }
+
+    public double getPrizePercent(PurchaseAmount purchaseAmount) {
+        int sum = 0;
+        for (Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
+            int winningAmount = Rank.getWinningAmount(entry.getKey());
+            int count = entry.getValue();
+            sum += winningAmount * count;
+        }
+        double prize = (double) sum / purchaseAmount.getPurchaseAmount();
+        return Math.round(prize * 10000) / 100.0;
     }
 }

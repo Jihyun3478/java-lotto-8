@@ -108,6 +108,8 @@ public class Application {
                         winningStatistics.getCountByRank(rank));
             }
         }
+        double prizePercent = winningStatistics.getPrizePercent(purchaseAmount);
+        System.out.print("총 수익률은 " + prizePercent + "%입니다.");
     }
 
     private static List<Integer> getWinningNumber() {

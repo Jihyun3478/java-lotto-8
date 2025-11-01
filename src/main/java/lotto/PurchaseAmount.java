@@ -35,4 +35,8 @@ public class PurchaseAmount {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 100,000원을 초과할 수 없습니다.");
         }
     }
+
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
 }

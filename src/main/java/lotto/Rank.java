@@ -37,4 +37,8 @@ public enum Rank {
     public int getWinningAmount() {
         return winningAmount;
     }
+
+    public static int getWinningAmount(Rank rank) {
+        return rank.winningAmount;
+    }
 }
