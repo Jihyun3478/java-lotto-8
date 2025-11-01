@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import camp.nextstep.edu.missionutils.Console;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
@@ -13,6 +10,7 @@ import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.Rank;
 import lotto.model.domain.WinningNumber;
 import lotto.model.domain.WinningStatistics;
+import lotto.util.InputParser;
 import lotto.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -108,7 +106,7 @@ public class RaceController {
             String input = inputView.input();
             InputValidator.validateNotBlank(input);
 
-            return Integer.parseInt(input);
+            return InputParser.parseToNumber(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
         }
@@ -119,12 +117,7 @@ public class RaceController {
             String input = inputView.input();
             InputValidator.validateNotBlank(input);
 
-            String[] splitInput = input.split(",", -1);
-            return Arrays.stream(splitInput)
-                    .map(String::strip)
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .toList();
+            return InputParser.parseToWinningNumber(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다.");
         }
@@ -134,8 +127,8 @@ public class RaceController {
         try {
             String input = inputView.input();
             InputValidator.validateNotBlank(input);
-            
-            return Integer.parseInt(input);
+
+            return InputParser.parseToNumber(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.");
         }
