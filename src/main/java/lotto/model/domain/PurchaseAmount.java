@@ -1,6 +1,9 @@
 package lotto.model.domain;
 
 public class PurchaseAmount {
+    private static final int PURCHASE_UNIT = 1000;
+    private static final int MAXIMUM_PURCHASE_AMOUNT = 100000;
+
     private int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
@@ -9,7 +12,7 @@ public class PurchaseAmount {
     }
 
     public int countPublishLotto() {
-        return purchaseAmount / 1000;
+        return purchaseAmount / PURCHASE_UNIT;
     }
 
     private void validate(int purchaseAmount) {
@@ -19,19 +22,19 @@ public class PurchaseAmount {
     }
 
     private void validateUnit(int purchaseAmount) {
-        if (purchaseAmount % 1000 != 0) {
+        if (purchaseAmount % PURCHASE_UNIT != 0) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 단위여야 합니다.");
         }
     }
 
     private void validateLowerLimit(int purchaseAmount) {
-        if (purchaseAmount < 1000) {
+        if (purchaseAmount < PURCHASE_UNIT) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 1000원 이상이여야 합니다.");
         }
     }
 
     private void validateUpperLimit(int purchaseAmount) {
-        if (purchaseAmount > 100000) {
+        if (purchaseAmount > MAXIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 100,000원을 초과할 수 없습니다.");
         }
     }

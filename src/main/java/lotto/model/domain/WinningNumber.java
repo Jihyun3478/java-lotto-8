@@ -1,5 +1,9 @@
 package lotto.model.domain;
 
+import static lotto.model.domain.LottoMachine.LOTTO_SIZE;
+import static lotto.model.domain.LottoMachine.MAXIMUM_LOTTO_RANGE;
+import static lotto.model.domain.LottoMachine.MINIMUM_LOTTO_RANGE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,14 +28,14 @@ public class WinningNumber {
     }
 
     private void validateSize(List<Integer> winningNumber) {
-        if (winningNumber.size() != 6) {
+        if (winningNumber.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
         }
     }
 
     private void validateNumberRange(List<Integer> winningNumber) {
         for (int number : winningNumber) {
-            if (number < 1 || number > 45) {
+            if (number < MINIMUM_LOTTO_RANGE || number > MAXIMUM_LOTTO_RANGE) {
                 throw new IllegalArgumentException("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야 합니다.");
             }
         }

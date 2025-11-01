@@ -1,5 +1,7 @@
 package lotto.model.domain;
 
+import static lotto.model.domain.LottoMachine.LOTTO_SIZE;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +21,7 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<Integer> lotto) {
-        if (lotto.size() != 6) {
+        if (lotto.size() != LOTTO_SIZE) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
     }
