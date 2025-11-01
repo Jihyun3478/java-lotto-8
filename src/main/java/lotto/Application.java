@@ -5,6 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lotto.model.domain.BonusNumber;
+import lotto.model.domain.Lotto;
+import lotto.model.domain.LottoMachine;
+import lotto.model.domain.Lottos;
+import lotto.model.domain.PurchaseAmount;
+import lotto.model.domain.Rank;
+import lotto.model.domain.WinningNumber;
+import lotto.model.domain.WinningStatistics;
 
 public class Application {
     public static void main(String[] args) {
