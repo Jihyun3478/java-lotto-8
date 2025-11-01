@@ -13,6 +13,7 @@ import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.Rank;
 import lotto.model.domain.WinningNumber;
 import lotto.model.domain.WinningStatistics;
+import lotto.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -105,9 +106,8 @@ public class RaceController {
     private int getPurchaseAmount() {
         try {
             String input = inputView.input();
-            if (Objects.isNull(input) || input.isBlank()) {
-                throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
-            }
+            InputValidator.validateNotBlank(input);
+
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
@@ -117,9 +117,8 @@ public class RaceController {
     private List<Integer> getWinningNumber() {
         try {
             String input = inputView.input();
-            if (Objects.isNull(input) || input.isBlank()) {
-                throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
-            }
+            InputValidator.validateNotBlank(input);
+
             String[] splitInput = input.split(",", -1);
             return Arrays.stream(splitInput)
                     .map(String::strip)
@@ -134,9 +133,8 @@ public class RaceController {
     private int getBonusNumber() {
         try {
             String input = inputView.input();
-            if (Objects.isNull(input) || input.isBlank()) {
-                throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
-            }
+            InputValidator.validateNotBlank(input);
+            
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.");
