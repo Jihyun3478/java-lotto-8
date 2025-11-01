@@ -43,4 +43,8 @@ public class WinningNumber {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
         }
     }
+
+    public List<Integer> getWinningNumber() {
+        return winningNumber;
+    }
 }

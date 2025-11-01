@@ -19,12 +19,27 @@ public class Application {
             Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
             lottos.add(lotto);
 
-            String joinLottos = lotto.getNumbers().stream().map(String::valueOf).collect(Collectors.joining(", "));
+            String joinLottos = lotto.getLotto().stream().map(String::valueOf).collect(Collectors.joining(", "));
             System.out.println("[" + joinLottos + "]");
         }
 
         WinningNumber winningNumber = createWinningNumber();
         BonusNumber bonusNumber = createBonusNumber(winningNumber);
+
+        int matchCount = 0;
+        boolean isBonusMatched = false;
+
+        Rank rank = null;
+        WinningStatistics winningStatistics = new WinningStatistics();
+
+        for (Lotto lotto : lottos.getLottos()) {
+            matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
+            isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
+
+            rank = Rank.getRank(matchCount, isBonusMatched);
+            winningStatistics.add(rank);
+        }
+        getWinningStatistics(winningStatistics, purchaseAmount);
     }
 
     private static PurchaseAmount createMoney() {
@@ -78,6 +93,20 @@ public class Application {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
+        }
+    }
+
+    private static void getWinningStatistics(WinningStatistics winningStatistics, PurchaseAmount purchaseAmount) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---");
+        for (Rank rank : Rank.values()) {
+            if (rank.equals(Rank.SECOND)) {
+                System.out.printf("%d개 일치, 보너스 볼 일치 (%,d원) - %d개%n", rank.getMatchCount(), rank.getWinningAmount(),
+                        winningStatistics.getCountByRank(rank));
+            } else {
+                System.out.printf("%d개 일치 (%,d원) - %d개%n", rank.getMatchCount(), rank.getWinningAmount(),
+                        winningStatistics.getCountByRank(rank));
+            }
         }
     }
 
