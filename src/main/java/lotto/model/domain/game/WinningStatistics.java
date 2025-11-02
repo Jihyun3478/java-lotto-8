@@ -1,8 +1,9 @@
-package lotto.model.domain;
+package lotto.model.domain.game;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.Objects;
+import lotto.model.domain.PurchaseAmount;
 
 public class WinningStatistics {
     private final EnumMap<Rank, Integer> winningStatistics;

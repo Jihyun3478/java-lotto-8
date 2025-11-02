@@ -2,6 +2,7 @@ package lotto.model.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import lotto.model.domain.game.LottoMachine;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

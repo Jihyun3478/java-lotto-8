@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model.domain.game;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
@@ -12,3 +12,4 @@ public class LottoMachine {
         return Randoms.pickUniqueNumbersInRange(MINIMUM_LOTTO_RANGE, MAXIMUM_LOTTO_RANGE, LOTTO_SIZE);
     }
 }
+
