@@ -9,17 +9,13 @@ import lotto.model.domain.operation.WinningStatistics;
 
 public class StatisticsService {
     public WinningStatistics calculateWinningStatistics(Lottos lottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
-        int matchCount = 0;
-        boolean isBonusMatched = false;
-
-        Rank rank = null;
         WinningStatistics winningStatistics = new WinningStatistics();
 
         for (Lotto lotto : lottos.getLottos()) {
-            matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
-            isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
+            int matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
+            boolean isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
 
-            rank = Rank.getRank(matchCount, isBonusMatched);
+            Rank rank = Rank.getRank(matchCount, isBonusMatched);
             winningStatistics.add(rank);
         }
         return winningStatistics;
