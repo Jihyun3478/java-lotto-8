@@ -11,7 +11,7 @@ public class OutputView {
     }
 
     public void promptLottos(String joinLottos) {
-        System.out.println("[" + joinLottos + "]");
+        System.out.println(joinLottos);
     }
 
     public void requestWinningNumber() {
