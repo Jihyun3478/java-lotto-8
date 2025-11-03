@@ -4,8 +4,8 @@ import java.util.stream.Collectors;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.PurchaseAmount;
-import lotto.model.domain.operation.Rank;
-import lotto.model.domain.operation.WinningStatistics;
+import lotto.model.domain.game.Rank;
+import lotto.model.domain.game.WinningStatistics;
 import lotto.view.OutputView;
 
 public class OutputHandler {

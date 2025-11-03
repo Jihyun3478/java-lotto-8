@@ -4,9 +4,9 @@ import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.WinningNumber;
-import lotto.model.domain.operation.NumberGenerator;
-import lotto.model.domain.operation.Rank;
-import lotto.model.domain.operation.WinningStatistics;
+import lotto.model.domain.game.NumberGenerator;
+import lotto.model.domain.game.Rank;
+import lotto.model.domain.game.WinningStatistics;
 
 public class LottoService {
     private final NumberGenerator numberGenerator;

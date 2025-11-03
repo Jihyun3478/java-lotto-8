@@ -6,7 +6,7 @@ import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.WinningNumber;
-import lotto.model.domain.operation.WinningStatistics;
+import lotto.model.domain.game.WinningStatistics;
 import lotto.model.service.LottoService;
 
 public class LottoController {

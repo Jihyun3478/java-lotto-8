@@ -1,4 +1,4 @@
-package lotto.model.domain.operation;
+package lotto.model.domain.game;
 
 import static lotto.common.constant.NumberConstant.LOTTO_SIZE;
 import static lotto.common.constant.NumberConstant.MAXIMUM_LOTTO_RANGE;
