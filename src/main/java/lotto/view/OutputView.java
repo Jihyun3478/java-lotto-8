@@ -45,7 +45,7 @@ public class OutputView {
             displayRank(rankResult);
         }
 
-        System.out.println(STATISTICS_PROFIT_RATE.getMessage(statisticsResponse.profitRate()));
+        System.out.print(STATISTICS_PROFIT_RATE.getMessage(statisticsResponse.profitRate()));
     }
 
     private void displayRank(RankResponse rankResult) {
