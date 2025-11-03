@@ -4,17 +4,21 @@ import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.WinningNumber;
-import lotto.model.domain.operation.LottoMachine;
+import lotto.model.domain.operation.NumberGenerator;
 import lotto.model.domain.operation.Rank;
 import lotto.model.domain.operation.WinningStatistics;
 
 public class LottoService {
-    private LottoMachine lottoMachine = new LottoMachine();
+    private final NumberGenerator numberGenerator;
+
+    public LottoService(NumberGenerator numberGenerator) {
+        this.numberGenerator = numberGenerator;
+    }
 
     public Lottos generateLottos(int countPublishLotto) {
         Lottos lottos = new Lottos();
         for (int count = 0; count < countPublishLotto; count++) {
-            Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
+            Lotto lotto = new Lotto(numberGenerator.generate());
             lottos.add(lotto);
         }
         return lottos;
