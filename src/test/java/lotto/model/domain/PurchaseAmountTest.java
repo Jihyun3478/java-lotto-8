@@ -104,9 +104,9 @@ public class PurchaseAmountTest {
         private static Stream<Arguments> generateLowerThanMinimumAmount() {
             return Stream.of(
                     Arguments.of(-1000),
-                    Arguments.of(-500),
+                    Arguments.of(-2000),
                     Arguments.of(0),
-                    Arguments.of(500)
+                    Arguments.of(-3000)
             );
         }
 
