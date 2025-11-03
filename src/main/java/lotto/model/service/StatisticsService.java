@@ -15,7 +15,7 @@ public class StatisticsService {
             int matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
             boolean isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
 
-            Rank rank = Rank.getRank(matchCount, isBonusMatched);
+            Rank rank = Rank.of(matchCount, isBonusMatched);
             winningStatistics.add(rank);
         }
         return winningStatistics;
