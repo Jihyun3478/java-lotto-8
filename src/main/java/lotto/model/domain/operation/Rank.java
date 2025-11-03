@@ -1,11 +1,14 @@
 package lotto.model.domain.operation;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIFTH(3, false, 5_000),
     FOURTH(4, false, 50_000),
     THIRD(5, false, 1_500_000),
     SECOND(5, true, 30_000_000),
     FIRST(6, false, 2_000_000_000),
+    NONE(0, false, 0),
     ;
 
     private final int matchCount;
@@ -18,16 +21,18 @@ public enum Rank {
         this.winningAmount = winningAmount;
     }
 
-    public static Rank getRank(int matchCount, boolean isBonusMatched) {
-        for (Rank rank : Rank.values()) {
-            if (rank.matchCount == matchCount) {
-                if (rank.matchCount == 5 && rank.isBonusMatched == isBonusMatched) {
-                    return SECOND;
-                }
-                return rank;
-            }
+    public static Rank of(int matchCount, boolean isBonusMatched) {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matches(matchCount, isBonusMatched))
+                .findAny()
+                .orElse(NONE);
+    }
+
+    private boolean matches(int matchCount, boolean isBonusMatched) {
+        if (this.matchCount != matchCount) {
+            return false;
         }
-        return null;
+        return this.matchCount != 5 || this.isBonusMatched == isBonusMatched;
     }
 
     public int getMatchCount() {
@@ -36,9 +41,5 @@ public enum Rank {
 
     public int getWinningAmount() {
         return winningAmount;
-    }
-
-    public static int getWinningAmount(Rank rank) {
-        return rank.winningAmount;
     }
 }
