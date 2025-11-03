@@ -50,13 +50,13 @@ public class Lotto {
         return lotto.contains(bonusNumber);
     }
 
-    public List<Integer> sorted(List<Integer> lotto) {
+    public List<Integer> getLotto() {
+        return lotto;
+    }
+
+    private List<Integer> sorted(List<Integer> lotto) {
         return lotto.stream()
                 .sorted()
                 .toList();
-    }
-
-    public List<Integer> getLotto() {
-        return lotto;
     }
 }
