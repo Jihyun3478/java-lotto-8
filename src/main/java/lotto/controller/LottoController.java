@@ -23,8 +23,8 @@ public class LottoController {
     public void start() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
         Lottos lottos = getLottos(purchaseAmount);
-        WinningStatisticsResponse statisticsResponse = getGameResult(lottos);
 
+        WinningStatisticsResponse statisticsResponse = getGameResult(lottos);
         outputHandler.displayWinningStatistics(statisticsResponse);
     }
 
