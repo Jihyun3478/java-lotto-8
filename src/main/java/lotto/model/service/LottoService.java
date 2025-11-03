@@ -1,5 +1,7 @@
 package lotto.model.service;
 
+import static lotto.common.constant.CommonConstant.PURCHASE_UNIT;
+
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
@@ -39,7 +41,7 @@ public class LottoService {
                 bonusNumber
         );
 
-        int purchaseAmount = lottos.size() * 1000;
+        int purchaseAmount = lottos.size() * PURCHASE_UNIT;
         PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
 
         return WinningStatisticsResponse.from(statistics, amount);
