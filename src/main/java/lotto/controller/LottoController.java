@@ -21,18 +21,34 @@ public class LottoController {
     }
 
     public void start() {
+        PurchaseAmount purchaseAmount = getPurchaseAmount();
+
+        Lottos lottos = getLottos(purchaseAmount.countPublishLotto());
+
+        WinningStatistics winningStatistics = getWinningStatistics(lottos);
+        outputHandler.displayWinningStatistics(winningStatistics, purchaseAmount);
+    }
+
+    private PurchaseAmount getPurchaseAmount() {
         PurchaseAmount purchaseAmount = inputHandler.handlePurchaseAmount();
         int countPublishLotto = purchaseAmount.countPublishLotto();
         outputHandler.displayLottoCount(countPublishLotto);
 
+        return purchaseAmount;
+    }
+
+    private Lottos getLottos(int countPublishLotto) {
         Lottos lottos = lottoService.generateLottos(countPublishLotto);
         outputHandler.displayLottos(lottos);
 
+        return lottos;
+    }
+
+    private WinningStatistics getWinningStatistics(Lottos lottos) {
         WinningNumber winningNumber = inputHandler.handleWinningNumber();
         BonusNumber bonusNumber = inputHandler.handleBonusNumber(winningNumber);
 
-        WinningStatistics winningStatistics = lottoService.calculateWinningStatistics(lottos, winningNumber,
+        return lottoService.calculateWinningStatistics(lottos, winningNumber,
                 bonusNumber);
-        outputHandler.displayWinningStatistics(winningStatistics, purchaseAmount);
     }
 }
