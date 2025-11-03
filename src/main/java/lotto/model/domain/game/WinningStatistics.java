@@ -35,7 +35,7 @@ public class WinningStatistics {
 
     private double calculateRankPrize(Entry<Rank, Integer> entry) {
         Rank rank = entry.getKey();
-        int winningAmount = rank.getWinningAmount();
+        long winningAmount = rank.getWinningAmount();
         int count = entry.getValue();
 
         return winningAmount * count;
