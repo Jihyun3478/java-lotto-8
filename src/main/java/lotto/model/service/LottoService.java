@@ -40,9 +40,7 @@ public class LottoService {
                 winningNumber,
                 bonusNumber
         );
-
-        int purchaseAmount = lottos.size() * PURCHASE_UNIT;
-        PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
+        PurchaseAmount amount = createPurchaseAmount(lottos);
 
         return WinningStatisticsResponse.from(statistics, amount);
     }
@@ -67,5 +65,10 @@ public class LottoService {
             statistics.add(rank);
         }
         return statistics;
+    }
+
+    private PurchaseAmount createPurchaseAmount(Lottos lottos) {
+        int purchaseAmount = lottos.size() * PURCHASE_UNIT;
+        return new PurchaseAmount(purchaseAmount);
     }
 }
