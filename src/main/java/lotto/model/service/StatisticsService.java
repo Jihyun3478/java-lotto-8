@@ -4,8 +4,8 @@ import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.WinningNumber;
-import lotto.model.domain.game.Rank;
-import lotto.model.domain.game.WinningStatistics;
+import lotto.model.domain.operation.Rank;
+import lotto.model.domain.operation.WinningStatistics;
 
 public class StatisticsService {
     public WinningStatistics calculateWinningStatistics(Lottos lottos, WinningNumber winningNumber, BonusNumber bonusNumber) {

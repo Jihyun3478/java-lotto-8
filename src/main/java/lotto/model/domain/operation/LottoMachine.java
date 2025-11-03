@@ -1,4 +1,4 @@
-package lotto.model.domain.game;
+package lotto.model.domain.operation;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;

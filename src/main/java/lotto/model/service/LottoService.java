@@ -2,7 +2,7 @@ package lotto.model.service;
 
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
-import lotto.model.domain.game.LottoMachine;
+import lotto.model.domain.operation.LottoMachine;
 
 public class LottoService {
     private LottoMachine lottoMachine = new LottoMachine();

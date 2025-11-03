@@ -1,4 +1,4 @@
-package lotto.model.domain.game;
+package lotto.model.domain.operation;
 
 import java.util.EnumMap;
 import java.util.Map.Entry;
