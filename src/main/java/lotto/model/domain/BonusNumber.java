@@ -1,7 +1,7 @@
 package lotto.model.domain;
 
-import static lotto.model.domain.operation.LottoMachine.MAXIMUM_LOTTO_RANGE;
-import static lotto.model.domain.operation.LottoMachine.MINIMUM_LOTTO_RANGE;
+import static lotto.common.constant.NumberConstant.MAXIMUM_LOTTO_RANGE;
+import static lotto.common.constant.NumberConstant.MINIMUM_LOTTO_RANGE;
 
 public class BonusNumber {
     private final int bonusNumber;

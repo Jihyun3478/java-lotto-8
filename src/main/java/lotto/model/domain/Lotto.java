@@ -1,6 +1,6 @@
 package lotto.model.domain;
 
-import static lotto.model.domain.operation.LottoMachine.LOTTO_SIZE;
+import static lotto.common.constant.NumberConstant.LOTTO_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
