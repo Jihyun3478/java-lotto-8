@@ -36,9 +36,9 @@ public class OutputHandler {
     }
 
     private String formatSingleLotto(Lotto lotto) {
-        return lotto.getLotto().stream()
+        return "[" + lotto.getLotto().stream()
                 .map(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", ")) + "]";
     }
 
     private void displayHeader() {
