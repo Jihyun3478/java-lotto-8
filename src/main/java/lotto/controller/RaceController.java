@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
-import lotto.model.domain.game.LottoMachine;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.game.Rank;
 import lotto.model.domain.WinningNumber;
 import lotto.model.domain.game.WinningStatistics;
+import lotto.model.service.LottoService;
+import lotto.model.service.StatisticsService;
 import lotto.util.InputParser;
 import lotto.util.InputValidator;
 import lotto.view.InputView;
@@ -18,48 +19,36 @@ import lotto.view.OutputView;
 public class RaceController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final LottoService lottoService;
+    private final StatisticsService statisticsService;
 
-    public RaceController(InputView inputView, OutputView outputView) {
+    public RaceController(InputView inputView, OutputView outputView, LottoService lottoService,
+                          StatisticsService statisticsService) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.lottoService = lottoService;
+        this.statisticsService = statisticsService;
     }
 
     public void start() {
-        PurchaseAmount purchaseAmount = createMoney();
-        LottoMachine lottoMachine = new LottoMachine();
-        Lottos lottos = new Lottos();
+        PurchaseAmount purchaseAmount = createPurchaseAmount();
 
         int countPublishLotto = purchaseAmount.countPublishLotto();
         outputView.promptCountPublishLotto(countPublishLotto);
 
-        for (int count = 0; count < countPublishLotto; count++) {
-            Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
-            lottos.add(lotto);
-
-            String joinLottos = lotto.getLotto().stream().map(String::valueOf).collect(Collectors.joining(", "));
-            outputView.promptLottos(joinLottos);
-        }
+        Lottos lottos = lottoService.generateLottos(countPublishLotto);
+        String formatLottos = formatLottos(lottos);
+        outputView.promptLottos(formatLottos);
 
         WinningNumber winningNumber = createWinningNumber();
         BonusNumber bonusNumber = createBonusNumber(winningNumber);
 
-        int matchCount = 0;
-        boolean isBonusMatched = false;
-
-        Rank rank = null;
-        WinningStatistics winningStatistics = new WinningStatistics();
-
-        for (Lotto lotto : lottos.getLottos()) {
-            matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
-            isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
-
-            rank = Rank.getRank(matchCount, isBonusMatched);
-            winningStatistics.add(rank);
-        }
-        getWinningStatistics(winningStatistics, purchaseAmount);
+        WinningStatistics winningStatistics = statisticsService.calculateWinningStatistics(lottos, winningNumber,
+                bonusNumber);
+        displayWinningStatistics(winningStatistics, purchaseAmount);
     }
 
-    private PurchaseAmount createMoney() {
+    private PurchaseAmount createPurchaseAmount() {
         while (true) {
             try {
                 outputView.requestPurchaseAmount();
@@ -70,6 +59,14 @@ public class RaceController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private String formatLottos(Lottos lottos) {
+        String joinLottos = "";
+        for (Lotto lotto : lottos.getLottos()) {
+            lotto.getLotto().stream().map(String::valueOf).collect(Collectors.joining(", "));
+        }
+        return joinLottos;
     }
 
     private WinningNumber createWinningNumber() {
@@ -134,7 +131,7 @@ public class RaceController {
         }
     }
 
-    private void getWinningStatistics(WinningStatistics winningStatistics, PurchaseAmount purchaseAmount) {
+    private void displayWinningStatistics(WinningStatistics winningStatistics, PurchaseAmount purchaseAmount) {
         System.out.println("\n당첨 통계");
         System.out.println("---");
         for (Rank rank : Rank.values()) {
