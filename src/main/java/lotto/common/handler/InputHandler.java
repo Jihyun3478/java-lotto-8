@@ -1,7 +1,5 @@
 package lotto.common.handler;
 
-import static lotto.common.exception.ErrorMessage.BONUS_NUMBER_MUST_NOT_DUPLICATE;
-
 import java.util.List;
 import lotto.common.util.InputParser;
 import lotto.common.util.InputValidator;
@@ -63,20 +61,20 @@ public class InputHandler {
         String input = inputView.input();
         InputValidator.validateNotBlank(input);
 
-        return InputParser.parseToNumber(input);
+        return InputParser.parseNumber(input);
     }
 
     private List<Integer> getWinningNumber() {
         String input = inputView.input();
         InputValidator.validateNotBlank(input);
 
-        return InputParser.parseToWinningNumber(input);
+        return InputParser.parseWinningNumbers(input);
     }
 
     private int getBonusNumber() {
         String input = inputView.input();
         InputValidator.validateNotBlank(input);
 
-        return InputParser.parseToNumber(input);
+        return InputParser.parseNumber(input);
     }
 }

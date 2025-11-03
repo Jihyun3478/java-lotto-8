@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InputParser {
-    public static int parseToNumber(String input) {
+    public static int parseNumber(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -15,7 +15,7 @@ public class InputParser {
         }
     }
 
-    public static List<Integer> parseToWinningNumber(String input) {
+    public static List<Integer> parseWinningNumbers(String input) {
         InputValidator.validateFormat(input);
 
         try {
