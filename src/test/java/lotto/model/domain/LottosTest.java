@@ -1,6 +1,6 @@
 package lotto.model.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import lotto.model.domain.game.NumberGenerator;
@@ -22,6 +22,6 @@ public class LottosTest {
             lottos.add(lotto);
         }
 
-        assertEquals(lottos.size(), countPublishLotto);
+        assertThat(lottos.size()).isEqualTo(countPublishLotto);
     }
 }
