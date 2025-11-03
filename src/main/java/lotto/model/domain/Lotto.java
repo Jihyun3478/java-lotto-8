@@ -17,6 +17,25 @@ public class Lotto {
         this.lotto = sorted(lotto);
     }
 
+    public int getMatchCount(List<Integer> winningNumber) {
+        return Math.toIntExact(lotto.stream()
+                .filter(number -> winningNumber.stream()
+                        .anyMatch(Predicate.isEqual(number)))
+                .count());
+    }
+
+    public boolean isBonusMatched(int bonusNumber) {
+        return lotto.contains(bonusNumber);
+    }
+
+    public int size() {
+        return lotto.size();
+    }
+
+    public List<Integer> getLotto() {
+        return lotto;
+    }
+
     private void validate(List<Integer> lotto) {
         validateLottoSize(lotto);
         validateDuplicateNumber(lotto);
@@ -33,25 +52,6 @@ public class Lotto {
         if (lotto.size() != uniqueNumbers.size()) {
             throw new IllegalArgumentException(LOTTO_MUST_NOT_DUPLICATE.getMessage());
         }
-    }
-
-    public int size() {
-        return lotto.size();
-    }
-
-    public int getMatchCount(List<Integer> winningNumber) {
-        return Math.toIntExact(lotto.stream()
-                .filter(number -> winningNumber.stream()
-                        .anyMatch(Predicate.isEqual(number)))
-                .count());
-    }
-
-    public boolean isBonusMatched(int bonusNumber) {
-        return lotto.contains(bonusNumber);
-    }
-
-    public List<Integer> getLotto() {
-        return lotto;
     }
 
     private List<Integer> sorted(List<Integer> lotto) {

@@ -18,6 +18,10 @@ public class PurchaseAmount {
         return purchaseAmount / PURCHASE_UNIT;
     }
 
+    public int getPurchaseAmount() {
+        return purchaseAmount;
+    }
+
     private void validate(int purchaseAmount) {
         validateUnit(purchaseAmount);
         validateLowerLimit(purchaseAmount);
@@ -40,9 +44,5 @@ public class PurchaseAmount {
         if (purchaseAmount > MAXIMUM_PURCHASE_AMOUNT) {
             throw new IllegalArgumentException(PURCHASE_AMOUNT_LESS_THAN_TEN_THOUSAND.getMessage(MAXIMUM_PURCHASE_AMOUNT));
         }
-    }
-
-    public int getPurchaseAmount() {
-        return purchaseAmount;
     }
 }

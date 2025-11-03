@@ -23,6 +23,10 @@ public class WinningNumber {
         return winningNumber.contains(bonusNumber);
     }
 
+    public List<Integer> getWinningNumber() {
+        return winningNumber;
+    }
+
     private void validate(List<Integer> winningNumber) {
         validateSize(winningNumber);
         validateNumberRange(winningNumber);
@@ -48,9 +52,5 @@ public class WinningNumber {
         if (winningNumber.size() != uniqueWinningNumbers.size()) {
             throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE.getMessage());
         }
-    }
-
-    public List<Integer> getWinningNumber() {
-        return winningNumber;
     }
 }

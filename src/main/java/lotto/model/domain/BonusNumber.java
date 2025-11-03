@@ -13,6 +13,10 @@ public class BonusNumber {
         this.bonusNumber = bonusNumber;
     }
 
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
     private void validate(int bonusNumber, WinningNumber winningNumber) {
         validateNumberRange(bonusNumber);
         validateDuplicateWinningNumber(bonusNumber, winningNumber);
@@ -28,9 +32,5 @@ public class BonusNumber {
         if (winningNumber.isContainBonusNumber(bonusNumber)) {
             throw new IllegalArgumentException(BONUS_NUMBER_MUST_NOT_DUPLICATE.getMessage());
         }
-    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
     }
 }
