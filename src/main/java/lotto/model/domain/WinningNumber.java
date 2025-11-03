@@ -19,9 +19,8 @@ public class WinningNumber {
         this.winningNumber = winningNumber;
     }
 
-    public boolean isDuplicateWithBonusNumber(int bonusNumber) {
-        return winningNumber.stream()
-                .anyMatch(number -> number == bonusNumber);
+    public boolean isContainBonusNumber(int bonusNumber) {
+        return winningNumber.contains(bonusNumber);
     }
 
     private void validate(List<Integer> winningNumber) {

@@ -51,11 +51,8 @@ public class InputHandler {
             try {
                 outputView.requestBonusNumber();
                 int bonusNumber = getBonusNumber();
-                if (winningNumber.isDuplicateWithBonusNumber(bonusNumber)) {
-                    throw new IllegalArgumentException(BONUS_NUMBER_MUST_NOT_DUPLICATE.getMessage());
-                }
 
-                return new BonusNumber(bonusNumber);
+                return new BonusNumber(bonusNumber, winningNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
