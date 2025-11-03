@@ -15,12 +15,14 @@ import lotto.model.domain.Lottos;
 import lotto.model.domain.game.Rank;
 
 public class OutputView {
+    private static final String NEW_LINE = "\n";
+
     public void requestPurchaseAmount() {
         System.out.println(REQUEST_PURCHASE_AMOUNT.getMessage());
     }
 
     public void promptCountPublishLotto(int countPublishLotto) {
-        System.out.println(PROMPT_PURCHASE_COUNT.getMessage(countPublishLotto));
+        System.out.println(NEW_LINE + PROMPT_PURCHASE_COUNT.getMessage(countPublishLotto));
     }
 
     public void promptLottos(Lottos lottos) {
@@ -28,15 +30,15 @@ public class OutputView {
     }
 
     public void requestWinningNumber() {
-        System.out.println(REQUEST_WINNING_NUMBER.getMessage());
+        System.out.println(NEW_LINE + REQUEST_WINNING_NUMBER.getMessage());
     }
 
     public void requestBonusNumber() {
-        System.out.println(REQUEST_BONUS_NUMBER.getMessage());
+        System.out.println(NEW_LINE + REQUEST_BONUS_NUMBER.getMessage());
     }
 
     public void promptStatisticsHeader() {
-        System.out.println(STATISTICS_HEADER.getMessage());
+        System.out.println(NEW_LINE + STATISTICS_HEADER.getMessage());
     }
 
     public void promptRanks(Rank rank, int countPublishLotto) {
@@ -52,7 +54,7 @@ public class OutputView {
     }
 
     public void promptProfitRate(double profitRate) {
-        System.out.print(STATISTICS_PROFIT_RATE.getMessage(profitRate));
+        System.out.println(STATISTICS_PROFIT_RATE.getMessage(profitRate));
     }
 
     private void formatLotto(Lotto lotto) {
