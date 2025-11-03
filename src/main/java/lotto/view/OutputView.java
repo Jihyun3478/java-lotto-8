@@ -12,7 +12,8 @@ import static lotto.view.OutputMessage.STATISTICS_RANK_SECOND;
 
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
-import lotto.model.domain.game.Rank;
+import lotto.model.response.WinningStatisticsResponse;
+import lotto.model.response.RankResponse;
 
 public class OutputView {
     private static final String NEW_LINE = "\n";
@@ -37,24 +38,30 @@ public class OutputView {
         System.out.println(NEW_LINE + REQUEST_BONUS_NUMBER.getMessage());
     }
 
-    public void promptStatisticsHeader() {
+    public void displayStatistics(WinningStatisticsResponse statisticsResponse) {
         System.out.println(NEW_LINE + STATISTICS_HEADER.getMessage());
+
+        for (RankResponse rankResult : statisticsResponse.ranks()) {
+            displayRank(rankResult);
+        }
+
+        System.out.println(STATISTICS_PROFIT_RATE.getMessage(statisticsResponse.profitRate()));
     }
 
-    public void promptRanks(Rank rank, int countPublishLotto) {
-        if (rank == Rank.SECOND) {
+    private void displayRank(RankResponse rankResult) {
+        if (rankResult.isSecond()) {
             System.out.println(STATISTICS_RANK_SECOND.getMessage(
-                    rank.getMatchCount(), rank.getWinningAmount(), countPublishLotto
+                    rankResult.matchCount(),
+                    rankResult.winningAmount(),
+                    rankResult.count()
             ));
             return;
         }
         System.out.println(STATISTICS_RANK_NORMAL.getMessage(
-                rank.getMatchCount(), rank.getWinningAmount(), countPublishLotto
+                rankResult.matchCount(),
+                rankResult.winningAmount(),
+                rankResult.count()
         ));
-    }
-
-    public void promptProfitRate(double profitRate) {
-        System.out.println(STATISTICS_PROFIT_RATE.getMessage(profitRate));
     }
 
     private void formatLotto(Lotto lotto) {

@@ -6,7 +6,7 @@ import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.WinningNumber;
-import lotto.model.domain.game.WinningStatistics;
+import lotto.model.response.WinningStatisticsResponse;
 import lotto.model.service.LottoService;
 
 public class LottoController {
@@ -22,33 +22,30 @@ public class LottoController {
 
     public void start() {
         PurchaseAmount purchaseAmount = getPurchaseAmount();
+        Lottos lottos = getLottos(purchaseAmount);
+        WinningStatisticsResponse statisticsResponse = getGameResult(lottos);
 
-        Lottos lottos = getLottos(purchaseAmount.countPublishLotto());
-
-        WinningStatistics winningStatistics = getWinningStatistics(lottos);
-        outputHandler.displayWinningStatistics(winningStatistics, purchaseAmount);
+        outputHandler.displayWinningStatistics(statisticsResponse);
     }
 
     private PurchaseAmount getPurchaseAmount() {
         PurchaseAmount purchaseAmount = inputHandler.handlePurchaseAmount();
-        int countPublishLotto = purchaseAmount.countPublishLotto();
-        outputHandler.displayLottoCount(countPublishLotto);
+        outputHandler.displayLottoCount(purchaseAmount.countPublishLotto());
 
         return purchaseAmount;
     }
 
-    private Lottos getLottos(int countPublishLotto) {
-        Lottos lottos = lottoService.generateLottos(countPublishLotto);
+    private Lottos getLottos(PurchaseAmount purchaseAmount) {
+        Lottos lottos = lottoService.generateLottos(purchaseAmount.getPurchaseAmount());
         outputHandler.displayLottos(lottos);
 
         return lottos;
     }
 
-    private WinningStatistics getWinningStatistics(Lottos lottos) {
+    private WinningStatisticsResponse getGameResult(Lottos lottos) {
         WinningNumber winningNumber = inputHandler.handleWinningNumber();
         BonusNumber bonusNumber = inputHandler.handleBonusNumber(winningNumber);
 
-        return lottoService.calculateWinningStatistics(lottos, winningNumber,
-                bonusNumber);
+        return lottoService.calculateResult(lottos, winningNumber, bonusNumber);
     }
 }

@@ -3,10 +3,12 @@ package lotto.model.service;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.Lottos;
+import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.WinningNumber;
 import lotto.model.domain.game.NumberGenerator;
 import lotto.model.domain.game.Rank;
 import lotto.model.domain.game.WinningStatistics;
+import lotto.model.response.WinningStatisticsResponse;
 
 public class LottoService {
     private final NumberGenerator numberGenerator;
@@ -15,25 +17,53 @@ public class LottoService {
         this.numberGenerator = numberGenerator;
     }
 
-    public Lottos generateLottos(int countPublishLotto) {
+    public Lottos generateLottos(int purchaseAmount) {
+        int lottoCount = getCount(purchaseAmount);
+
         Lottos lottos = new Lottos();
-        for (int count = 0; count < countPublishLotto; count++) {
+        for (int i = 0; i < lottoCount; i++) {
             Lotto lotto = new Lotto(numberGenerator.generate());
             lottos.add(lotto);
         }
         return lottos;
     }
 
-    public WinningStatistics calculateWinningStatistics(Lottos lottos, WinningNumber winningNumber, BonusNumber bonusNumber) {
-        WinningStatistics winningStatistics = new WinningStatistics();
+    public WinningStatisticsResponse calculateResult(
+            Lottos lottos,
+            WinningNumber winningNumber,
+            BonusNumber bonusNumber
+    ) {
+        WinningStatistics statistics = calculateWinningStatistics(
+                lottos,
+                winningNumber,
+                bonusNumber
+        );
+
+        int purchaseAmount = lottos.size() * 1000;
+        PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
+
+        return WinningStatisticsResponse.from(statistics, amount);
+    }
+
+    private int getCount(int purchaseAmount) {
+        PurchaseAmount amount = new PurchaseAmount(purchaseAmount);
+        return amount.countPublishLotto();
+    }
+
+    private WinningStatistics calculateWinningStatistics(
+            Lottos lottos,
+            WinningNumber winningNumber,
+            BonusNumber bonusNumber
+    ) {
+        WinningStatistics statistics = new WinningStatistics();
 
         for (Lotto lotto : lottos.getLottos()) {
             int matchCount = lotto.getMatchCount(winningNumber.getWinningNumber());
             boolean isBonusMatched = lotto.isBonusMatched(bonusNumber.getBonusNumber());
 
             Rank rank = Rank.of(matchCount, isBonusMatched);
-            winningStatistics.add(rank);
+            statistics.add(rank);
         }
-        return winningStatistics;
+        return statistics;
     }
 }
