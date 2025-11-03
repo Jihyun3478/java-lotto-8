@@ -25,7 +25,8 @@ public class WinningStatistics {
     public double getPrizePercent(PurchaseAmount purchaseAmount) {
         int sum = 0;
         for (Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
-            int winningAmount = Rank.getWinningAmount(entry.getKey());
+            Rank rank = entry.getKey();
+            int winningAmount = rank.getWinningAmount();
             int count = entry.getValue();
             sum += winningAmount * count;
         }
