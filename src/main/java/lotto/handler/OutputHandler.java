@@ -14,11 +14,11 @@ public class OutputHandler {
     public OutputHandler(OutputView outputView) {
         this.outputView = outputView;
     }
-    
+
     public void displayLottoCount(int countPublishLotto) {
         outputView.promptCountPublishLotto(countPublishLotto);
     }
-    
+
     public void displayLottos(Lottos lottos) {
         outputView.promptLottos(formatLottos(lottos));
     }
@@ -51,10 +51,10 @@ public class OutputHandler {
             if (rank.equals(Rank.SECOND)) {
                 System.out.printf("%d개 일치, 보너스 볼 일치 (%,d원) - %d개%n", rank.getMatchCount(), rank.getWinningAmount(),
                         winningStatistics.getCountByRank(rank));
-            } else {
-                System.out.printf("%d개 일치 (%,d원) - %d개%n", rank.getMatchCount(), rank.getWinningAmount(),
-                        winningStatistics.getCountByRank(rank));
+                continue;
             }
+            System.out.printf("%d개 일치 (%,d원) - %d개%n", rank.getMatchCount(), rank.getWinningAmount(),
+                    winningStatistics.getCountByRank(rank));
         }
     }
 
