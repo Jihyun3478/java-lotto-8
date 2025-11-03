@@ -16,14 +16,14 @@ import lotto.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-public class RaceController {
+public class LottoController {
     private final InputView inputView;
     private final OutputView outputView;
     private final LottoService lottoService;
     private final StatisticsService statisticsService;
 
-    public RaceController(InputView inputView, OutputView outputView, LottoService lottoService,
-                          StatisticsService statisticsService) {
+    public LottoController(InputView inputView, OutputView outputView, LottoService lottoService,
+                           StatisticsService statisticsService) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoService = lottoService;
