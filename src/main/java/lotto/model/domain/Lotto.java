@@ -1,6 +1,8 @@
 package lotto.model.domain;
 
-import static lotto.common.constant.NumberConstant.LOTTO_SIZE;
+import static lotto.common.constant.CommonConstant.NUMBERS_SIZE;
+import static lotto.common.exception.ErrorMessage.LOTTO_INVALID_SIZE;
+import static lotto.common.exception.ErrorMessage.LOTTO_MUST_NOT_DUPLICATE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,15 +23,15 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<Integer> lotto) {
-        if (lotto.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        if (lotto.size() != NUMBERS_SIZE) {
+            throw new IllegalArgumentException(LOTTO_INVALID_SIZE.getMessage(NUMBERS_SIZE));
         }
     }
 
     private void validateDuplicateNumber(List<Integer> lotto) {
         Set<Integer> uniqueNumbers = new HashSet<>(lotto);
         if (lotto.size() != uniqueNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않아야 합니다.");
+            throw new IllegalArgumentException(LOTTO_MUST_NOT_DUPLICATE.getMessage());
         }
     }
 

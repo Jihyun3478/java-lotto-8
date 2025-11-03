@@ -1,7 +1,8 @@
 package lotto.model.domain;
 
-import static lotto.common.constant.NumberConstant.MAXIMUM_LOTTO_RANGE;
-import static lotto.common.constant.NumberConstant.MINIMUM_LOTTO_RANGE;
+import static lotto.common.constant.CommonConstant.MAXIMUM_NUMBER_RANGE;
+import static lotto.common.constant.CommonConstant.MINIMUM_NUMBER_RANGE;
+import static lotto.common.exception.ErrorMessage.BONUS_NUMBER_INVALID_RANGE;
 
 public class BonusNumber {
     private final int bonusNumber;
@@ -12,8 +13,8 @@ public class BonusNumber {
     }
 
     private void validateNumberRange(int bonusNumber) {
-        if (bonusNumber < MINIMUM_LOTTO_RANGE || bonusNumber > MAXIMUM_LOTTO_RANGE) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 1과 45 사이의 숫자여야 합니다.");
+        if (bonusNumber < MINIMUM_NUMBER_RANGE || bonusNumber > MAXIMUM_NUMBER_RANGE) {
+            throw new IllegalArgumentException(BONUS_NUMBER_INVALID_RANGE.getMessage(MINIMUM_NUMBER_RANGE, MAXIMUM_NUMBER_RANGE));
         }
     }
 

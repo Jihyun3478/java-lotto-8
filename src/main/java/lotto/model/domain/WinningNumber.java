@@ -1,8 +1,11 @@
 package lotto.model.domain;
 
-import static lotto.common.constant.NumberConstant.LOTTO_SIZE;
-import static lotto.common.constant.NumberConstant.MAXIMUM_LOTTO_RANGE;
-import static lotto.common.constant.NumberConstant.MINIMUM_LOTTO_RANGE;
+import static lotto.common.constant.CommonConstant.MAXIMUM_NUMBER_RANGE;
+import static lotto.common.constant.CommonConstant.MINIMUM_NUMBER_RANGE;
+import static lotto.common.constant.CommonConstant.NUMBERS_SIZE;
+import static lotto.common.exception.ErrorMessage.WINNING_NUMBER_DUPLICATE;
+import static lotto.common.exception.ErrorMessage.WINNING_NUMBER_INVALID_RANGE;
+import static lotto.common.exception.ErrorMessage.WINNING_NUMBER_INVALID_SIZE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,15 +31,15 @@ public class WinningNumber {
     }
 
     private void validateSize(List<Integer> winningNumber) {
-        if (winningNumber.size() != LOTTO_SIZE) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
+        if (winningNumber.size() != NUMBERS_SIZE) {
+            throw new IllegalArgumentException(WINNING_NUMBER_INVALID_SIZE.getMessage(NUMBERS_SIZE));
         }
     }
 
     private void validateNumberRange(List<Integer> winningNumber) {
         for (int number : winningNumber) {
-            if (number < MINIMUM_LOTTO_RANGE || number > MAXIMUM_LOTTO_RANGE) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1과 45 사이의 숫자여야 합니다.");
+            if (number < MINIMUM_NUMBER_RANGE || number > MAXIMUM_NUMBER_RANGE) {
+                throw new IllegalArgumentException(WINNING_NUMBER_INVALID_RANGE.getMessage(MINIMUM_NUMBER_RANGE, MAXIMUM_NUMBER_RANGE));
             }
         }
     }
@@ -44,7 +47,7 @@ public class WinningNumber {
     private void validateDuplicate(List<Integer> winningNumber) {
         Set<Integer> uniqueWinningNumbers = new HashSet<>(winningNumber);
         if (winningNumber.size() != uniqueWinningNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+            throw new IllegalArgumentException(WINNING_NUMBER_DUPLICATE.getMessage());
         }
     }
 
