@@ -1,4 +1,4 @@
-package lotto.common.handler;
+package lotto.handler;
 
 import lotto.model.domain.Lottos;
 import lotto.model.response.WinningStatisticsResponse;

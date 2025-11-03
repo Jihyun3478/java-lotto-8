@@ -1,4 +1,4 @@
-package lotto.common.util;
+package lotto.util;
 
 import static lotto.common.constant.CommonConstant.DELIMITER;
 import static lotto.common.exception.ErrorMessage.INPUT_IS_EMPTY;

@@ -1,8 +1,8 @@
 package lotto.common.config;
 
 import lotto.controller.LottoController;
-import lotto.common.handler.InputHandler;
-import lotto.common.handler.OutputHandler;
+import lotto.handler.InputHandler;
+import lotto.handler.OutputHandler;
 import lotto.model.domain.game.NumberGenerator;
 import lotto.model.domain.game.RandomNumberGenerator;
 import lotto.model.service.LottoService;
