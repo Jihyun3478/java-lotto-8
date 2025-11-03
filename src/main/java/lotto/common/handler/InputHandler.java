@@ -1,11 +1,13 @@
 package lotto.common.handler;
 
+import static lotto.common.exception.ErrorMessage.BONUS_NUMBER_MUST_NOT_DUPLICATE;
+
 import java.util.List;
+import lotto.common.util.InputParser;
+import lotto.common.util.InputValidator;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.WinningNumber;
-import lotto.common.util.InputParser;
-import lotto.common.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -50,7 +52,7 @@ public class InputHandler {
                 outputView.requestBonusNumber();
                 int bonusNumber = getBonusNumber();
                 if (winningNumber.isDuplicateWithBonusNumber(bonusNumber)) {
-                    throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복되지 않아야 합니다.");
+                    throw new IllegalArgumentException(BONUS_NUMBER_MUST_NOT_DUPLICATE.getMessage());
                 }
 
                 return new BonusNumber(bonusNumber);
@@ -61,35 +63,23 @@ public class InputHandler {
     }
 
     private int getPurchaseAmount() {
-        try {
-            String input = inputView.input();
-            InputValidator.validateNotBlank(input);
+        String input = inputView.input();
+        InputValidator.validateNotBlank(input);
 
-            return InputParser.parseToNumber(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
-        }
+        return InputParser.parseToNumber(input);
     }
 
     private List<Integer> getWinningNumber() {
-        try {
-            String input = inputView.input();
-            InputValidator.validateNotBlank(input);
+        String input = inputView.input();
+        InputValidator.validateNotBlank(input);
 
-            return InputParser.parseToWinningNumber(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 숫자여야 합니다.");
-        }
+        return InputParser.parseToWinningNumber(input);
     }
 
     private int getBonusNumber() {
-        try {
-            String input = inputView.input();
-            InputValidator.validateNotBlank(input);
+        String input = inputView.input();
+        InputValidator.validateNotBlank(input);
 
-            return InputParser.parseToNumber(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 숫자여야 합니다.");
-        }
+        return InputParser.parseToNumber(input);
     }
 }

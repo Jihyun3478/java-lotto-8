@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.common.exception.ErrorMessage.INPUT_IS_EMPTY;
+import static lotto.common.exception.ErrorMessage.INPUT_MUST_NUMBER_FORMAT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import lotto.common.util.InputParser;
@@ -15,15 +17,24 @@ public class InputValidatorTest {
     void 입력값이_비어있는_경우_예외가_발생한다(String input) {
         assertThatThrownBy(() -> InputValidator.validateNotBlank(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 입력값이 비어있습니다.");
+                .hasMessage(INPUT_IS_EMPTY.getMessage());
     }
 
     @ParameterizedTest
     @ValueSource(strings = {"입력", "금액"})
-    @DisplayName("로또 구입 금액이 숫자가 아닌 경우 예외가 발생한다.")
-    void 구입_금액이_숫자가_아닌_경우_예외가_발생한다(String input) {
+    @DisplayName("입력값이 숫자가 아닌 경우 예외가 발생한다.")
+    void 입려값이_숫자가_아닌_경우_예외가_발생한다(String input) {
         assertThatThrownBy(() -> InputParser.parseToNumber(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 구입 금액은 숫자여야 합니다.");
+                .hasMessageContaining(INPUT_MUST_NUMBER_FORMAT.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"1,2,3,4,5", "1,2,3,,4,5,6", "1.2.3.4.5.6", ",1,2,3,4,5,6", "1,2,3,4,5,6,,,"})
+    @DisplayName("입력값이 잘못된 형식일 경우 예외가 발생한다.")
+    void 입력값이_잘못된_형식일_경우_예외가_발생한다(String input) {
+        assertThatThrownBy(() -> InputParser.parseToNumber(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(INPUT_MUST_NUMBER_FORMAT.getMessage());
     }
 }

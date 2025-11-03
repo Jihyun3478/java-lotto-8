@@ -1,5 +1,8 @@
 package lotto.common.util;
 
+import static lotto.common.constant.CommonConstant.DELIMITER;
+import static lotto.common.exception.ErrorMessage.INPUT_MUST_NUMBER_FORMAT;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,17 +11,23 @@ public class InputParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구입 금액은 숫자여야 합니다.");
+            throw new IllegalArgumentException(INPUT_MUST_NUMBER_FORMAT.getMessage());
         }
     }
 
     public static List<Integer> parseToWinningNumber(String input) {
-        String[] splitInput = input.split(",", -1);
+        InputValidator.validateFormat(input);
 
-        return Arrays.stream(splitInput)
-                .map(String::strip)
-                .mapToInt(Integer::parseInt)
-                .boxed()
-                .toList();
+        try {
+            String[] splitInput = input.split(DELIMITER, -1);
+
+            return Arrays.stream(splitInput)
+                    .map(String::strip)
+                    .mapToInt(Integer::parseInt)
+                    .boxed()
+                    .toList();
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INPUT_MUST_NUMBER_FORMAT.getMessage());
+        }
     }
 }
