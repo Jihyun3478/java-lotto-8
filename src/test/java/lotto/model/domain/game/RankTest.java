@@ -35,8 +35,6 @@ public class RankTest {
                 "0, true",
                 "1, true",
                 "2, true",
-                "3, true",
-                "4, true"
         })
         @DisplayName("당첨되지 않은 경우 NONE을 반환한다.")
         void 당첨되지_않은_경우_NONE을_반환한다(int matchCount, boolean bonusMatched) {
