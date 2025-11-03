@@ -22,7 +22,6 @@ public class LottoController {
 
     public void start() {
         PurchaseAmount purchaseAmount = inputHandler.handlePurchaseAmount();
-
         int countPublishLotto = purchaseAmount.countPublishLotto();
         outputHandler.displayLottoCount(countPublishLotto);
 
@@ -34,7 +33,6 @@ public class LottoController {
 
         WinningStatistics winningStatistics = lottoService.calculateWinningStatistics(lottos, winningNumber,
                 bonusNumber);
-
         outputHandler.displayWinningStatistics(winningStatistics, purchaseAmount);
     }
 }
