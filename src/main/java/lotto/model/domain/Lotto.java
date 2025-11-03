@@ -12,7 +12,7 @@ public class Lotto {
 
     public Lotto(List<Integer> lotto) {
         validate(lotto);
-        this.lotto = lotto;
+        this.lotto = sorted(lotto);
     }
 
     private void validate(List<Integer> lotto) {
@@ -46,6 +46,12 @@ public class Lotto {
 
     public boolean isBonusMatched(int bonusNumber) {
         return lotto.contains(bonusNumber);
+    }
+
+    public List<Integer> sorted(List<Integer> lotto) {
+        return lotto.stream()
+                .sorted()
+                .toList();
     }
 
     public List<Integer> getLotto() {
