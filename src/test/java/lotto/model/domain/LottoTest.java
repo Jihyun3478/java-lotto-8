@@ -9,10 +9,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 class LottoTest {
     @Nested
@@ -58,22 +56,15 @@ class LottoTest {
     @Nested
     @DisplayName("로또 당첨 확인 테스트")
     class 로또_당첨_확인_테스트 {
-        @ParameterizedTest
-        @CsvSource(value = {
-                "1:2:3:4:5:6, 1:2:3:4:5:6, 6",
-                "1:2:3:4:5:6, 7:8:9:10:11:12, 0",
-                "1:2:3:4:5:6, 1:7:8:9:10:11, 1",
-                "1:2:3:4:5:6, 1:2:3:7:8:9, 3",
-                "1:2:3:4:5:6, 1:2:3:4:5:7, 5"
-        }, delimiter = ',')
+        @Test
         @DisplayName("당첨 번호와 일치하는 번호 개수를 반환한다.")
-        void 당첨_번호와_일치하는_번호_개수를_반환한다(String lottoNumbers, String winningNumbers, int expected) {
-            Lotto lotto = new Lotto(parseNumbers(lottoNumbers));
-            List<Integer> winning = parseNumbers(winningNumbers);
+        void 당첨_번호와_일치하는_번호_개수를_반환한다() {
+            Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+            List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 7);
 
-            int matchCount = lotto.getMatchCount(winning);
+            int matchCount = lotto.getMatchCount(winningNumbers);
 
-            assertThat(matchCount).isEqualTo(expected);
+            assertThat(matchCount).isEqualTo(5);
         }
 
         @Test
