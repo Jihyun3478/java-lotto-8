@@ -22,15 +22,22 @@ public class WinningStatistics {
         return winningStatistics.getOrDefault(rank, 0);
     }
 
-    public double getPrizePercent(PurchaseAmount purchaseAmount) {
-        int sum = 0;
-        for (Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
-            Rank rank = entry.getKey();
-            int winningAmount = rank.getWinningAmount();
-            int count = entry.getValue();
-            sum += winningAmount * count;
-        }
-        double prize = (double) sum / purchaseAmount.getPurchaseAmount();
+    public double calculatePrizePercent(PurchaseAmount purchaseAmount) {
+        double prize = calculateTotalPrize() / purchaseAmount.getPurchaseAmount();
         return Math.round(prize * 10000) / 100.0;
+    }
+
+    private double calculateTotalPrize() {
+        return winningStatistics.entrySet().stream()
+                .mapToDouble(this::calculateRankPrize)
+                .sum();
+    }
+
+    private double calculateRankPrize(Entry<Rank, Integer> entry) {
+        Rank rank = entry.getKey();
+        int winningAmount = rank.getWinningAmount();
+        int count = entry.getValue();
+
+        return winningAmount * count;
     }
 }

@@ -59,7 +59,7 @@ public class OutputHandler {
     }
 
     private void displayProfitRate(WinningStatistics winningStatistics, PurchaseAmount purchaseAmount) {
-        double prizePercent = winningStatistics.getPrizePercent(purchaseAmount);
+        double prizePercent = winningStatistics.calculatePrizePercent(purchaseAmount);
         System.out.print("총 수익률은 " + prizePercent + "%입니다.");
     }
 }
