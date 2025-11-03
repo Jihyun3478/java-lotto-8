@@ -1,7 +1,7 @@
 package lotto.controller;
 
-import lotto.handler.InputHandler;
-import lotto.handler.OutputHandler;
+import lotto.common.handler.InputHandler;
+import lotto.common.handler.OutputHandler;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.Lottos;
 import lotto.model.domain.PurchaseAmount;

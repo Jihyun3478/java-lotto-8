@@ -1,11 +1,11 @@
-package lotto.handler;
+package lotto.common.handler;
 
 import java.util.List;
 import lotto.model.domain.BonusNumber;
 import lotto.model.domain.PurchaseAmount;
 import lotto.model.domain.WinningNumber;
-import lotto.util.InputParser;
-import lotto.util.InputValidator;
+import lotto.common.util.InputParser;
+import lotto.common.util.InputValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 

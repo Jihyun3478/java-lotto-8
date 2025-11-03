@@ -1,4 +1,4 @@
-package lotto.util;
+package lotto.common.util;
 
 import java.util.Arrays;
 import java.util.List;

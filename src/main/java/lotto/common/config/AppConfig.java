@@ -1,8 +1,8 @@
 package lotto.common.config;
 
 import lotto.controller.LottoController;
-import lotto.handler.InputHandler;
-import lotto.handler.OutputHandler;
+import lotto.common.handler.InputHandler;
+import lotto.common.handler.OutputHandler;
 import lotto.model.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
