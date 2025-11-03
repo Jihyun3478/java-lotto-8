@@ -2,7 +2,8 @@ package lotto.model.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import lotto.model.domain.operation.LottoMachine;
+import java.util.List;
+import lotto.model.domain.operation.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,11 +14,11 @@ public class LottosTest {
         PurchaseAmount purchaseAmount = new PurchaseAmount(8000);
         int countPublishLotto = purchaseAmount.countPublishLotto();
 
-        LottoMachine lottoMachine = new LottoMachine();
-        Lottos lottos = new Lottos();
+        NumberGenerator randomNumberGenerator = () -> List.of(1, 2, 3, 4, 5, 6);
 
+        Lottos lottos = new Lottos();
         for (int count = 0; count < countPublishLotto; count++) {
-            Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
+            Lotto lotto = new Lotto(randomNumberGenerator.generate());
             lottos.add(lotto);
         }
 

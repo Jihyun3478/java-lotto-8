@@ -3,6 +3,8 @@ package lotto.common.config;
 import lotto.controller.LottoController;
 import lotto.common.handler.InputHandler;
 import lotto.common.handler.OutputHandler;
+import lotto.model.domain.operation.NumberGenerator;
+import lotto.model.domain.operation.RandomNumberGenerator;
 import lotto.model.service.LottoService;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,8 +26,12 @@ public class AppConfig {
         return new OutputHandler(outputView());
     }
 
+    public NumberGenerator numberGenerator() {
+        return new RandomNumberGenerator();
+    }
+
     public LottoService lottoService() {
-        return new LottoService();
+        return new LottoService(numberGenerator());
     }
 
     public LottoController lottoController() {

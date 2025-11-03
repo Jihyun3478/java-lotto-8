@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import lotto.model.domain.operation.LottoMachine;
+import lotto.model.domain.operation.NumberGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +12,8 @@ class LottoTest {
     @Test
     @DisplayName("로또를 성공적으로 발행한다.")
     void 로또를_발행한다() {
-        LottoMachine lottoMachine = new LottoMachine();
-        Lotto lotto = new Lotto(lottoMachine.generateRandomNumbers());
+        NumberGenerator randomNumberGenerator = () -> List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(randomNumberGenerator.generate());
 
         assertEquals(6, lotto.size());
     }
