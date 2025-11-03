@@ -7,7 +7,7 @@ import static lotto.common.exception.ErrorMessage.PURCHASE_AMOUNT_LESS_THAN_TEN_
 import static lotto.common.exception.ErrorMessage.PURCHASE_AMOUNT_MORE_THAN_THOUSAND;
 
 public class PurchaseAmount {
-    private int purchaseAmount;
+    private final int purchaseAmount;
 
     public PurchaseAmount(int purchaseAmount) {
         validate(purchaseAmount);
